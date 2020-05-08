@@ -1,0 +1,113 @@
+ESTE É UM TUTORIAL PARA INSTALAÇÃO DAS MAIS RECENTES FERRAMENTAS DE
+IMPLEMENTAÇÃO DE MODELOS DE DEEP LEARNING EM R EM AMBIENTE WINDOWS 10:
+
+R 4.0.0 "Arbor Day"
+RTools 4
+Anaconda 2020.02
+Python 3.7
+CUDA® 10.1
+NVIDIA CUDA® Deep Neural Network library 7.6.7
+RSTUDIO Desktop 1.2.5
+TensorFlow 2.2.0
+Keras 2.3.0
+
+
+INSTALAÇÃO DO R 4.0.0 "Arbor Day"
+1) Baixar o R 4.0.0 aqui: https://cran.r-project.org/bin/windows/base/R-4.0.0-win.exe.
+2) Executar o instalador como administrador e instalar o R 4.0.0.
+3) Clicar com o botão direito>Propriedades tanto no ícone do R i386 como do x64. Na aba Compatibilidade marcar a 
+opção "Executar como administrador".
+4) Ir até a pasta de Arquivos de Programas>R>R-4.0.0. Clicar com o botão direito do mouse>Propriedades. Ir até a aba 
+Segurança e dar permissão total aos usuários SISTEMA, Administradores e Usuários.
+
+INSTALAÇÃO DO R TOOLS 4
+1) Baixar o RTools 4 (versão x86 e x64 que já inclui compiladores para i386 e x64) aqui: https://cran.r-project.org/bin/windows/Rtools/rtools40-x86_64.exe
+2) Abrir console RGui (64-bit).
+3) Criar um arquivo de ambiente para o R Tools com o seguinte comando:
+writeLines('PATH="${RTOOLS40_HOME}\\usr\\bin;${PATH}"', con = "~/.Renviron")
+4) Conferir se o arquivo .Renviron foi criado na pasta Documentos. Se não, você pode fazer isso no braço.
+5) Fechar e abrir o console.
+6) Conferir a instalação com:
+Sys.which("make")
+Se der certo você verá: "C:\\rtools40\\usr\\bin\\make.exe"   
+7) Tente instalar e compilar um pacote por meio dos fontes, por exemplo: 
+install.packages("jsonlite", type = "source")
+Se compilar, então o R Tools 4 estará rodando.
+
+INSTALANDO O ANACONDA 2020.02 (PYTHON 3.7):
+1) Baixe a versão 64-Bit do Anaconda aqui: https://repo.anaconda.com/archive/Anaconda3-2020.02-Windows-x86_64.exe.
+2) Executar o instalador como administrador.
+3) Ir até o ícone do Anaconda Navigator, clicar com o botão direito do mouse>Propriedades. Na aba compatibilidade
+marcar a opção "Executar como administrador".
+
+INSTALANDO O CUDA:
+Nota importante: Você precisa possuir no seu computador uma placa de vídeo com CUDA cores.
+Verifique aqui se a sua placa é compatível com CUDA aqui: https://developer.nvidia.com/cuda-gpus#compute
+
+1) Baixar o Drive Booster aqui: https://driver-booster.br.uptodown.com/windows/download.
+2) Execute o programa para ver se existem atualizações para os drivers da sua GPU. Se sim, atualize.
+3) Baixe o CUDA Toolkit 10.1 (tem que ser a 10.1, não serve a 10.2 e nem a 10.0, é a 10.1!) aqui: https://developer.nvidia.com/cuda-10.1-download-archive-base
+4) No momento da instalação selecione "Instalação personalizada" e desmarque tudo, exceto:
+- Development
+- Runtime
+- Documentation
+Não se preocupe, TensorFlow não precisa de nada do que você está desmarcando. Isso é para você deixar de instalar coisas inúteis.
+
+INSTALANDO NVIDIA CUDA® Deep Neural Network library (cuDNN 7.6.7):
+1) Baixe as bibliotecas do cuDNN 7.6.7 para Windows 10 aqui: https://developer.nvidia.com/compute/machine-learning/cudnn/secure/7.6.4.38/Production/10.1_20190923/cudnn-10.1-windows10-x64-v7.6.4.38.zip
+2) Descompacte o arquivo zip baixado.
+3) Copie as pastas bin, include e lib.
+4) Cole as mesmas em Arquivos de Programas\NVIDIA GPU Computing Toolkit\CUDA\v10.1.
+
+INSTALANDO O RSTUDIO DESKTOP:
+1) Baixe o RStudio 1.2.5 aqui: https://rstudio.com/products/rstudio/download/#download
+2) Instale o mesmo como administrador.
+3) Acesse o ícone do RStudio, clique com botão direito do mouse>Propriedades e na aba Compatibilidade marque 
+"Executar como administrador".
+
+INSTALANDO O TENSORFLOW:
+1) Abra o RStudio.
+2) Instale o pacote "remotes" com:
+install.packages("remotes")
+3) Habilite as compilações do RTools instalando o devtools com:
+install.packages("devtools")
+4) Baixe a versão mais recente do TensorFlow compatível com R (2.1.0) com:
+remotes::install_github("rstudio/tensorflow")
+5) Reinicie o RStudio.
+6) Carregue o TensorFlow com:
+library(tensorflow)
+7) Instale o TensorFlow com:
+install_tensorflow()
+Nota: Um ambiente Python será criado com o nome de r-reticulate. Você pode conferir no Anaconda Navigator.
+8) Reinicie o RStudio.
+9) Carregue o TensorFlow com:
+library(tensorflow)
+10) Configure o TensorFlow para rodar com GPU com:
+tf_config()
+Se der tudo certo você verá:
+2020-05-07 23:46:48.769252: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cudart64_101.dll
+TensorFlow v2.1.0 (C:\PROGRA~3\ANACON~1\envs\R-RETI~1\lib\site-packages\tensorflow\__init__.p)
+Python v3.6 (C:/ProgramData/Anaconda3/envs/r-reticulate/python.exe)
+11) Reinicie o RStudio.
+
+INSTALANDO O KERAS
+1) Baixe o Keras com:
+remotes::install_github("rstudio/keras")
+2) Reinicie o RStudio.
+3) Carregue o Keras com:
+library(keras)
+4) Instale o Keras com interface para o TensorFlow GPU com:
+install_keras(tensorflow = "gpu")
+
+CONFERINDO SE TUDO ESTÁ CERTO:
+1) Carregue o TensorFlow com:
+library(tensorflow)
+2) Execute o comando:
+tf$test$is_gpu_available()
+Se tudo der certo a resposta será um delicioso TRUE.
+
+Agora basta criar excelentes aplicações com uso de Deep Learning e ver sua performance de treinamento dos modelos acelerar.
+Se não tem nada para realizar o teste segue um link de uma solitária conversa que tive comigo mesmo num post do StackOverflow que traz uma aplicação bem simples e prática que elaborei para uso de uma LSTM:
+
+How to implement a simple and basic multi step LSTM with Keras IN R?
+https://stackoverflow.com/questions/57184390/how-to-implement-a-simple-and-basic-multi-step-lstm-with-keras-in-r

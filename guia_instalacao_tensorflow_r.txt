@@ -79,7 +79,8 @@ library(tensorflow)
 7) Instale o TensorFlow com:
 install_tensorflow()
 Nota: Um ambiente Python será criado com o nome de r-reticulate. Você pode conferir no Anaconda Navigator.
-Nota 2: Caso você tenha problemas com o R dizendo que não é possível a instalação em ambientes virtuais no Windows, force a criação de um ambiente virtual com: 
+Nota 2: Caso você tenha problemas com o R dizendo que não é possível a instalação em ambientes virtuais no Windows, 
+force a criação de um ambiente virtual com: 
 reticulate::conda_install()
 Na sequência tente novamente a instalação do TensorFlow indicando explicitadamente o nome do ambiente virtual, assim:
 install_tensorflow(envname = "r-reticulate")

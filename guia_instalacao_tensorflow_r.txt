@@ -84,6 +84,8 @@ force a criação de um ambiente virtual com:
 reticulate::conda_install()
 Na sequência tente novamente a instalação do TensorFlow indicando explicitadamente o nome do ambiente virtual, assim:
 install_tensorflow(envname = "r-reticulate")
+Nota 3: Caso ainda não funcione, tente usar a versão 2.0.0 do TensorFlow:
+install_tensorflow(method="conda", version = "2.0.0", envname = "r-reticulate")
 8) Reinicie o RStudio.
 9) Carregue o TensorFlow com:
 library(tensorflow)
